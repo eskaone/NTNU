@@ -21,6 +21,10 @@ public class Oppg1 {
 
         listNodes();
 
+        dl.fjern(dl.finnNr(4));
+
+        listNodes();
+
         //FIXME: Fjerning av noder i gitt intervall
         //fjernNodes(4);
     }
