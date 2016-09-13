@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oving2</title>
+</head>
+<body>
+    <img id="image" src="Images/before.jpg" onmouseover="paaBilde()" onmouseout="avBilde()">
+
+<script>
+    function paaBilde() {
+        document.getElementById("image").src("Images/after.jpg");
+    }
+
+    function avBilde() {
+        document.getElementById("image").src("Images/before.jpg");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+.black {
+    color: black;
+    text-shadow: 3px 3px 5px red;
+    font-size:50px;
+    text-align: center;
+    margin: auto;
+    overflow: auto;
+    font-family: "Impact";
+    position: relative;
+    top: 100px;
+    z-index: 1;
+
+}
+
+.green {
+    color: green;
+    text-shadow: 3px 3px 5px black;
+    font-size:50px;
+    text-align: center;
+    margin: auto;
+    overflow: auto;
+    font-family: "Impact";
+    position: relative;
+    top: 100px;
+    z-index: 1;
+}
+
+.red {
+    color: red;
+    text-shadow: 3px 3px 5px black;
+    font-size:50px;
+    text-align: center;
+    margin: auto;
+    overflow: auto;
+    font-family: "Impact";
+    position: relative;
+    top: 100px;
+    z-index: 1;
+}
+
+#container {
+    position: relative;
+}
+
+.background {
+    position: absolute;
+    width: 1600px;
+    height: 1400px;
+    margin: auto;
+    overflow: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.foreground {
+    border: solid black 3px;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    overflow: auto;
+    top: 700px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+

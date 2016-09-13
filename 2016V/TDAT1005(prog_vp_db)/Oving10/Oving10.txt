@@ -1,0 +1,15 @@
+~ Øving 10 ~
+
+	Oppgave 1:
+		a)
+			1. normalform tilfredstiller tabellen under.
+			Tabellen har minst en kandidatnøkkel, og tabellen inneholder ikke repeterende grupper.
+		
+		b)
+			Normalisering forsøker å oppnå:
+			Å unngå at det blir problemer når vi gjør endringer i databasen:
+				Oppdateringer kan føre til inkonsistent data.
+				Det kan være umulig å legge inn visse typer data.
+				Å slette kan føre til at vi mister mer data enn det som var hensikten.
+			Å gjøre databasen lett å utvide.
+			Å få en bedre datamodell.

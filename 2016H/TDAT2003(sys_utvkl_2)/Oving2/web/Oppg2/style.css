@@ -1,0 +1,36 @@
+#brett {
+    width:300px;
+    height:300px;
+    border: 3px solid black;
+    text-align: center;
+}
+
+.rute{
+    background-color: grey;
+}
+
+.rute_color1 {
+    background-color: #f5b700;
+}
+
+.rute_color2 {
+    background-color: #008bf8;
+}
+
+.flash {
+    -webkit-animation-name: flash-animation;
+    -webkit-animation-duration: 2s;
+
+    animation-name: flash-animation;
+    animation-duration: 2s;
+}
+
+@-webkit-keyframes flash-animation {
+    from { background-color: #008bf8; }
+    to   { background-color: #f5b700; }
+}
+
+@keyframes flash-animation {
+    from { background-color: #008bf8; }
+    to   { background-color: #f5b700; }
+}
