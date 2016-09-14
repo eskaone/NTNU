@@ -4,8 +4,8 @@ package Oppgave1;
  * Created by asdfLaptop on 13.09.2016.
  */
 public class DobbelLenke {
-    private Node hode = null;
-    private Node hale = null;
+    private Node hode;
+    private Node hale;
     private int antElementer = 0;
 
     public int finnAntall() {
@@ -31,27 +31,23 @@ public class DobbelLenke {
     }
 
     public void settInnBakerst(int verdi){
-        Node ny = new Node(verdi, null, hale);
-        if(hale != null) {
-            hale.neste = ny;
-        } else{
-            hode = ny;
-        }
-        hale = ny;
+            if(hode == null) {
+                hode = new Node(verdi, null, null);
+                hode.neste = hode;
+                hode.forrige = hode;
+                //System.out.println("forste");
+
+            } else {
+                hode.forrige = new Node(verdi, hode, hode.forrige);
+                hode.forrige.forrige.neste = hode.forrige;
+                //System.out.println("resten");
+            }
         antElementer++;
     }
 
     public Node fjern(Node n) {
-        if(n.forrige != null) {
-            n.forrige.neste = n.neste;
-        } else {
-            hode = n.neste;
-        }
-        if(n.neste != null) {
-            n.neste.forrige = n.forrige;
-        } else {
-            hale = n.forrige;
-        }
+        n.forrige.neste = n.neste;
+        n.neste.forrige = n.forrige;
         n.neste = null;
         n.forrige = null;
         antElementer--;

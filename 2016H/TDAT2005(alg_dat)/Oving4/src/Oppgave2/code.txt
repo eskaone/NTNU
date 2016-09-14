@@ -1,0 +1,9 @@
+
+public static int[] genererData(int n) {
+    Random r = new Random();
+    int[] tabell = new int[n];
+    for(int i = 0; i < n; i++) {
+        tabell[i] = r.nextInt(10);
+    }
+    return tabell;
+}

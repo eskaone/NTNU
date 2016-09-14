@@ -8,47 +8,35 @@ public class Oppg1 {
 
     public static void main(String[] args) {
         //Lager noder
-        lagNodes(10);
+        lagNodes(41);
 
-        //Testing
-        listNodes();
-
-        dl.fjern(dl.finnNr(0));
-
-        listNodes();
-
-        dl.fjern(dl.finnNr(8));
-
-        listNodes();
-
-        dl.fjern(dl.finnNr(4));
-
-        listNodes();
-
-        //FIXME: Fjerning av noder i gitt intervall
-        //fjernNodes(4);
+        //Fjerner noder i gitt intervall
+        fjernNodes(3);
     }
 
     public static DobbelLenke lagNodes(int antall) {
         for(int i = 0; i < antall; i++) {
-            dl.settInnFremst(i);
+            dl.settInnBakerst(i);
         }
+        System.out.println(dl.finnAntall());
         return dl;
     }
 
-    //FIXME
     public static void fjernNodes(int intervall) {
         Node n = dl.finnHode();
-        while(n != null && n != n.neste) {
+        while(n != null && n.neste != n) {
             for(int i = 0; i < intervall-1; i++) {
                 n = n.neste;
             }
+            System.out.println("Fjerner: " + dl.fjern(n.neste).finnElement());
+            //listNodes();
         }
-        System.out.println("Fjerner node nr: " + dl.fjern(n).finnElement());
+        if(dl.finnAntall() == 1) {
+            System.out.println(n.finnElement());
+        }
     }
 
     public static void listNodes() {
-        System.out.println("Liste bestående av " + dl.finnAntall() + " noder: ");
         for(int i = 0; i < dl.finnAntall(); i++) {
             System.out.print(dl.finnNr(i).finnElement() + " ");
         }
