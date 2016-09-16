@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="RESTexample:war exploded">
-    <output-path>$USER_HOME$/Downloads/rest-prosjekt/target/RESTexample-1</output-path>
+    <output-path>$PROJECT_DIR$/target/RESTexample-1</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -31,7 +31,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$USER_HOME$/Downloads/rest-prosjekt/target/RESTexample-1/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/RESTexample-1/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="RESTexample/web/Web" />
     </root>

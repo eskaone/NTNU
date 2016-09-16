@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="RESTexample:war">
-    <output-path>$USER_HOME$/Downloads/rest-prosjekt/target</output-path>
+    <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="RESTexample-1.war">
       <element id="artifact" artifact-name="RESTexample:war exploded" />
     </root>
