@@ -48,6 +48,7 @@
   - [Øving 1](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2003(sys_utvkl_2)/Oving1)
   - [Øving 2](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2003(sys_utvkl_2)/Oving2)
   - [Øving 3](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2003(sys_utvkl_2)/Oving3)
+  - [Øving 4](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2003(sys_utvkl_2)/Oving4)
 - **TDAT2005** - Algorytmer og datastrukturer:
   - [Øving 1](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving1)
   - [Øving 2](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving2)
