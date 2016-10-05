@@ -14,7 +14,6 @@ public class Main  {
 
     public static void main(String[] args) throws IOException {
         new Main().runBfs();
-        //new Main().runTopo();
     }
 
     public void runBfs() throws IOException {
@@ -26,13 +25,6 @@ public class Main  {
         }
     }
 
-    public void runTopo() throws IOException {
-        lesInn();
-        for(int i = 0; i<node.length; i++){
-            Integer[] t = getData(node[i]);
-            System.out.println("Node: " + t[0]+ " Forgjenger: " + t[1] + " Distanse: " + t[2]);
-        }
-    }
 
     public void lesInn() throws IOException{
         File fil = new File("graphs/L7g1.txt");
@@ -103,27 +95,4 @@ public class Main  {
             }
         }
     }
-
-    public Node df_topo(Node n, Node l) {
-        Topo_lst nd = (Topo_lst)n.d;
-        if(nd.funnet) return l;
-        nd.funnet = true;
-        for(Kant k = n.kant1; k != null; k = k.neste) {
-            l = df_topo(k.til, l);
-        }
-        nd.neste = l;
-        return n;
-    }
-
-    public Node topologiSort() {
-        Node l = null;
-        for(int i = N; i-- > 0;) {
-            node[i].d = new Topo_lst();
-        }
-        for(int i = N; i-- >0;) {
-            l = df_topo(node[i], l);
-        }
-        return l;
-    }
-
 }
