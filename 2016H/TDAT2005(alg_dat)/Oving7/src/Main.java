@@ -13,10 +13,10 @@ public class Main  {
     int K;
 
     public static void main(String[] args) throws IOException {
-        new Main().runBfs();
+        new Main().run();
     }
 
-    public void runBfs() throws IOException {
+    public void run() throws IOException {
         lesInn();
         bfs(node[5]);
         for(int i = 0; i<node.length; i++){
@@ -28,10 +28,6 @@ public class Main  {
 
     public void lesInn() throws IOException{
         File fil = new File("graphs/L7g1.txt");
-        //File fil = new File("graphs/L7g2.txt");
-        //File fil = new File("graphs/L7g3.txt)";
-        //File fil = new File("graphs/L7g4.txt)";
-        //File fil = new File("graphs/L7g5.txt");
 
         BufferedReader br = new BufferedReader(new FileReader(fil));
         StringTokenizer st = new StringTokenizer(br.readLine());
