@@ -42,18 +42,41 @@ class RelationProperties {
     public static boolean isSymmetric(char[][] relation, char [] set){
         int count = 0;
         for(int i = 0; i < relation.length; i++) {
-            for(int j = 0; j < relation.length; j++) {
-                if(relation[i][0] == relation[j][1] && relation[i][1] == relation[j][0]) {
-                    count++;
+            if(relation[i][0] != relation[i][1]) {
+                for(int j = 0; j < relation.length; j++) {
+                    if(relation[i][0] == relation[j][1] && relation[i][1] == relation[j][0]) {
+                        count++;
+                    }
                 }
             }
-
         }
-        return count == relation.length;
+        return count == set.length;
     }
 
     public static boolean isTransitive(char[][] relation, char [] set){
-        return false;
+        int count = 0;
+        for(int i = 0; i < relation.length; i++) {
+            if(relation[i][0] != relation[i][1]) {
+                for(int j = 0; j < relation.length; j++) {
+                    if(relation[j][0] != relation[j][1]) {
+                        if(relation[i][1] == relation[j][0]) {
+                            for(int k = 0; k < relation.length; k++) {
+                                if(relation[k][0] != relation[k][1]) {
+                                    if(relation[i][0] == relation[k][1]) {
+                                        count++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(count == 0) {
+            return true;
+        } else {
+            return set.length*4 == count; //FIXME: make-shift af
+        }
     }
 
     public static boolean isAntiSymmetric(char[][] relation, char [] set){
