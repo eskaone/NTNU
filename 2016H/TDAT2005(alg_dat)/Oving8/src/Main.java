@@ -107,7 +107,8 @@ public class Main  {
         PriorityQueue pq = lag_priko(nodes);
         for(int i = N; i > 1; i--) {
             Node n = (Node)hent_min(pq);
-            for(VKant k = (VKant)n.kant1; k != null; k = k.neste) {
+            System.out.println(n);
+            for(VKant k = (VKant)n.kant1; k != null; k = (VKant)k.neste) {
                 forkort(n, k, pq);
             }
         }
