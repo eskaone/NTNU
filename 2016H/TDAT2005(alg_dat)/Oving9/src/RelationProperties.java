@@ -5,85 +5,75 @@ class RelationProperties {
      */
 
     public static boolean isReflexive(char[][] relation, char [] set){
-        int ctr = 0;
+        int count = 0;
         for (int i = 0; i < relation.length; i++) {
-            //Count loops from a node to itself ex.{b,b}
             if(relation[i][0] == relation[i][1]){
-                ctr++;
+                count++;
             }
         }
-        return ctr == set.length;
+        return count == set.length;
     }
-    //It's symmetric if for all {a,b} we have a counterpart {b,azz}
+
     public static boolean isSymmetric(char[][] relation, char [] set){
-        int amtOneway = 0;
-        int amtBack = 0;
+        int a = 0;
+        int b = 0;
         for (int i = 0; i < relation.length;i++) {
             char[] curr = relation[i];
             if(curr[0] != curr[1]){
-                amtOneway++;
+                a++;
                 for (int j = 0; j < relation.length; j++) {
                     if(relation[j][0] != relation[j][1]) {
-                        //If two nodes have edges going both ways, it's symmetric
                         if(curr[0] == relation[j][1] && curr[1] == relation[j][0]){
-                            amtBack++;
+                            b++;
                         }
                     }
                 }
             }
         }
-        //If we have same amt of edges one way as amt of edges the other way, we have symmetry
-        return amtBack == amtOneway;
+        return a == b;
     }
-    //char[] setA = {'a','x','r','m','2','0'};
-    //If x --> y and y -->z, we also have x --> z
+
     public static boolean isTransitive(char[][] relation, char [] set){
-        boolean transitive = false;
+        boolean transitive = true;
         for (int i = 0; i < relation.length; i++) {
-            transitive = true;
-            char x1 = relation[i][0];
-            char y1 = relation[i][1];
-            if(x1 != y1){
+            char x0 = relation[i][0];
+            char x1 = relation[i][1];
+            if(x0 != x1){
                 for (int j = 0; j < relation.length; j++) {
-                    char y2 = relation[j][0];
-                    char z1 = relation[j][1];
-                    if (y2 != z1) {
-                        //Does last corner match first corner of another elem
-                        if (y1 == y2 && z1 != x1) {
-                            int k = 0;
+                    char y0 = relation[j][0];
+                    char y1 = relation[j][1];
+                    if (y0 != y1) {
+                        if (x1 == y0 && y1 != x0) {
+                            int count = 0;
                             transitive = false;
-                            while(k < relation.length && !transitive) {
-                                char x2 = relation[k][0];
-                                char z2 = relation[k][1];
-                                if(x2 != z2) {
-                                    if (x1 == x2) {
-                                        transitive = (z1 == z2);
+                            while(count < relation.length && !transitive) {
+                                char z0 = relation[count][0];
+                                char z1 = relation[count][1];
+                                if(z0 != z1) {
+                                    if (x0 == z0) {
+                                        transitive = (y1 == z1);
                                     }
                                 }
-                                k++;
+                                count++;
                             }
                         }
                     }
                 }
             }
         }
-        //If a rel is symmetric, it must also be reflexive
         if(isSymmetric(relation, set)) {
             return isReflexive(relation, set) && transitive;
         }
         return transitive;
     }
 
-    //Means that if we ex. have {a,b} and {b,a}, b = a, which means we only have loops and single way R
     public static boolean isAntiSymmetric(char[][] relation, char [] set){
         for (int i = 0; i < relation.length;i++) {
             char[] curr = relation[i];
             if(curr[0] != curr[1]){
                 for (int j = 0; j < relation.length; j++) {
                     if(relation[j][0] != relation[j][1]) {
-                        //If two nodes have edges going both ways, it's symmetric
                         if(curr[0] == relation[j][1] && curr[1] == relation[j][0]){
-                            //We only need to find one symmetry to conclude that it isn't antiSymmetric
                             return false;
                         }
                     }
@@ -92,11 +82,11 @@ class RelationProperties {
         }
         return true;
     }
-    //A relation is an Equivalence Relation if it's reflexive, symmetric and transitive.
+
     public static boolean isEquivalenceRelation(char[][] relation, char [] set){
         return isReflexive(relation,set) && isSymmetric(relation,set) && isTransitive(relation,set);
     }
-    //A relation is a Partial order if it's transitive, antisymmetric and reflective
+
     public static boolean isPartialOrder(char[][] relation, char [] set){
         return isTransitive(relation,set) && isAntiSymmetric(relation, set) && isReflexive(relation, set);
     }
@@ -132,6 +122,4 @@ class RelationProperties {
 		   Rel2 is a partial order: false
 		 */
     }
-
-
 }
