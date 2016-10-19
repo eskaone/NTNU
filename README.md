@@ -1,5 +1,5 @@
 # NTNU - Bachelor i dataingeniør
-*Readme vil bli oppdatert minst en gang for hvert semester(ish).*
+*Readme vil bli oppdatert minst en gang for hvert semester(ish). Last update to readme: 19/10-16*
 
 ### ~2015H~
 - **TDAT1001** - Programmering grunnkurs:
@@ -21,6 +21,7 @@
   - [Lejos Golfbanebil](https://github.com/haakonrp/NTNU/tree/master/2015H/TDAT1007(ing_ife)/lejos-golfbanebil)
   - [Lejos Hitratunnel](https://github.com/haakonrp/NTNU/tree/master/2015H/TDAT1007(ing_ife)/lejos-hitratunnel)
   - [Lejos Useless-Machine](https://github.com/haakonrp/NTNU/tree/master/2015H/TDAT1007(ing_ife)/lejos-useless_machine)
+  - [Lejos org](https://github.com/SuRoMoTeHfGo)
 
 ### ~2016V~
 - **TDAT1005** - Videregående programmering med databaser:
