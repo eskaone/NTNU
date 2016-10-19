@@ -40,6 +40,7 @@
   - [Øving 14](https://github.com/haakonrp/NTNU/tree/master/2016V/TDAT1005(prog_vp_db)/Oving14)
 - **TDAT1006** - Systemutvikling 1:
   - [Catering-system](https://github.com/haakonrp/NTNU/tree/master/2016V/TDAT1006(sys_utvkl_1)/Catering-System/)
+  - [Catering-system org](https://github.com/Byte-Me/Catering-System)
   
 ### ~2016H~
 - **TDAT2001** - Realfag:
@@ -49,9 +50,15 @@
   - [Øving 2](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2003(sys_utvkl_2)/Oving2)
   - [Øving 3](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2003(sys_utvkl_2)/Oving3)
   - [Øving 4](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2003(sys_utvkl_2)/Oving4)
+  - [Øving 5-10 (Smartere Hus org)](https://github.com/SmartereHusAS/WEBAPP)
 - **TDAT2005** - Algorytmer og datastrukturer:
   - [Øving 1](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving1)
   - [Øving 2](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving2)
   - [Øving 3](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving3)
   - [Øving 4](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving4)
   - [Øving 5](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving5)
+  - [Øving 6](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving6)
+  - [Øving 7](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving7)
+  - [Øving 7_1](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving7_1)
+  - [Øving 8](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving8)
+  - [Øving 9](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving9)
