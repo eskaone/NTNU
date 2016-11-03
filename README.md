@@ -1,5 +1,5 @@
 # NTNU - Bachelor i dataingeniør
-*Readme vil bli oppdatert minst en gang for hvert semester(ish). Last update to readme: 19/10-16*
+*Readme vil bli oppdatert minst en gang for hvert semester(ish). Last update to readme: 03/11-16*
 
 ### ~2015H~
 - **TDAT1001** - Programmering grunnkurs:
@@ -63,3 +63,5 @@
   - [Øving 7_1](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving7_1)
   - [Øving 8](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving8)
   - [Øving 9](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving9)
+  - [Øving 11](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving11)
+  
