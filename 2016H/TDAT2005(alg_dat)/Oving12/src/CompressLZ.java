@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+
 /**
  * Created by asdfLaptop on 08.11.2016.
  */
@@ -9,13 +13,13 @@ public class CompressLZ {
     private byte[] outputBuffer;
     private int outputLength;
 
-    public void loadFile(String fileName) {
-        sourceBytes = FileUtil.readAllBytes(fileName);
+    public void loadFile(String fileName) throws IOException {
+        sourceBytes = FileUtils.readFileToByteArray(new File(fileName));
         outputBuffer = new byte[sourceBytes.length];
         this.fileName = fileName;
     }
 
-    public void start() {
+    public void start() throws IOException {
         byte uncompressedCount = 0;
         int uncompressedStartIndex = -1;
         for(int i = 0; i < sourceBytes.length; i++) {
@@ -99,7 +103,7 @@ public class CompressLZ {
             outputLength++; // 1 byte for length
         }
         //System.out.println(convertToString(outputBuffer, 0, outputLength));
-        FileUtil.writeAllBytes(fileName + ".comp", outputBuffer, outputLength);
+        FileUtils.writeByteArrayToFile(new File(fileName + ".comp"), outputBuffer);
     }
 
     private static String convertToString(byte[] buffer, int startIndex, int count) {
@@ -110,8 +114,8 @@ public class CompressLZ {
         return s;
     }
 
-    public static void main(String[] args) {
-        String path = "testfiler/ukomprimert/???";
+    public static void main(String[] args) throws IOException {
+        String path = "testfiler/diverse.txt";
         CompressLZ lz = new CompressLZ();
         lz.loadFile(path);
         lz.start();

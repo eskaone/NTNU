@@ -1,3 +1,8 @@
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Created by asdfLaptop on 08.11.2016.
  */
@@ -8,13 +13,13 @@ public class DecompressLZ {
     private byte[] outputBuffer;
     private int outputLength;
 
-    public void loadFile(String fileName) {
-        sourceBytes = FileUtil.readAllBytes(fileName);
+    public void loadFile(String fileName) throws IOException {
+        sourceBytes = FileUtils.readFileToByteArray(new File(fileName));
         outputBuffer = new byte[sourceBytes.length*5];
         this.fileName = fileName;
     }
 
-    public void start() {
+    public void start() throws IOException {
         for(int i = 0; i < sourceBytes.length; i++) {
             byte currentByte = sourceBytes[i];
             if (currentByte > 0) {
@@ -49,7 +54,7 @@ public class DecompressLZ {
             }
         }
         //System.out.println(convertToString(outputBuffer, 0, outputLength));
-        FileUtil.writeAllBytes(fileName.replace(".comp", ".uncomp"), outputBuffer, outputLength);
+        FileUtils.writeByteArrayToFile(new File(fileName.replace(".comp", ".uncomp")), outputBuffer);
     }
 
     private static String convertToString(byte[] buffer, int startIndex, int count) {
@@ -60,8 +65,8 @@ public class DecompressLZ {
         return s;
     }
 
-    public static void main(String[] args) {
-        String path = "testfiler/komprimert/???";
+    public static void main(String[] args) throws IOException {
+        String path = "testfiler/diverse.txt.comp";
         DecompressLZ lz = new DecompressLZ();
         lz.loadFile(path);
         lz.start();
