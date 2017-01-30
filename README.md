@@ -67,6 +67,6 @@
   
 ### ~2017V~
 - **TDAT2003** - Systemutvikling 2:
-  - [MinVakt org](https://github.com/Scrum-m8s/MinVakt)
+  - [Scrumprosjekt (MinVakt org)](https://github.com/Scrum-m8s/MinVakt)
 - **TDAT2004** - Datakommunikasjon med nettverksprogrammering:
   - [Øving 1](https://github.com/haakonrp/NTNU/tree/master/2017V/TDAT2004(datakom_nettprog)/Oving1)
