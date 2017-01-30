@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/qwop/Documents/NTNU/Nettverksprog/Oving1/main.cpp" "/home/qwop/Documents/NTNU/Nettverksprog/Oving1/build/CMakeFiles/Oving1.dir/main.cpp.o"
+  "/home/qwop/Documents/GitHub/NTNU/2017V/TDAT2004(datakom_nettprog)/Oving1/main.cpp" "/home/qwop/Documents/GitHub/NTNU/2017V/TDAT2004(datakom_nettprog)/Oving1/build/CMakeFiles/Oving1.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

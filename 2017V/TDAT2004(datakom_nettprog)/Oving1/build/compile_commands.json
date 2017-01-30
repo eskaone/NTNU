@@ -1,7 +1,7 @@
 [
 {
-  "directory": "/home/qwop/Documents/NTNU/Nettverksprog/Oving1/build",
-  "command": "/usr/bin/c++      -std=c++1y -pthread -Wall -Wextra -Wno-unused-parameter   -o CMakeFiles/Oving1.dir/main.cpp.o -c /home/qwop/Documents/NTNU/Nettverksprog/Oving1/main.cpp",
-  "file": "/home/qwop/Documents/NTNU/Nettverksprog/Oving1/main.cpp"
+  "directory": "/home/qwop/Documents/GitHub/NTNU/2017V/TDAT2004(datakom_nettprog)/Oving1/build",
+  "command": "/usr/bin/c++      -std=c++1y -Wall -pthread -Wextra -Wno-unused-parameter   -o CMakeFiles/Oving1.dir/main.cpp.o -c \"/home/qwop/Documents/GitHub/NTNU/2017V/TDAT2004(datakom_nettprog)/Oving1/main.cpp\"",
+  "file": "/home/qwop/Documents/GitHub/NTNU/2017V/TDAT2004(datakom_nettprog)/Oving1/main.cpp"
 }
 ]

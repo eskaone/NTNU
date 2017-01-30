@@ -8,17 +8,14 @@
 using namespace std;
 
 bool isPrime(int x) {
-  int TOP
-  = static_cast<int>(
-      sqrt( static_cast<double>( x ) )
-    ) + 1;
-
+  int TOP = static_cast<int>(sqrt(static_cast<double>(x))) + 1;
   for ( int i=2; i != TOP; ++i ) {
     if (x % i == 0) return false;
   }
   return true;
 }
 
+/*
 vector<int> findPrimes(int from, int to) {
 
   vector<int> primes;
@@ -49,6 +46,7 @@ void execute(int from, int to, int threadAmt) {
     //threads.at(i) 
   }
 }
+*/
 
 // for(int i = 0; i < (int)threads.size(); i++) {
 //   threads.at(i).join();
@@ -67,31 +65,31 @@ void execute(int from, int to, int threadAmt) {
 
 
 
-// void findPrimes(int from, int to, int threadAmt) {
-//   cout << "Find all primes between " << from << " - " << to << ":\n";
-//   vector<int> primes;
-//   vector<thread> threads; 
-//   mutex primes_mutex;
+void findPrimes(int from, int to, int threadAmt) {
+  cout << "Find all primes between " << from << " - " << to << ":\n";
+  vector<int> primes;
+  vector<thread> threads; 
+  mutex primes_mutex;
   
-//   for(int i = 0; i < threadAmt; ++i) {
-//     threads.emplace_back(thread([&](){
-//       for (int i = from; i <= to; i++) {
-//         if(isPrime(i)) {
-//           lock_guard<mutex> lock(primes_mutex);
-//           primes.emplace_back(i);
-//         }
-//       }
-//     }));
-//   }
+  for(int i = 0; i < threadAmt; ++i) {
+    threads.emplace_back(thread([&](){
+      for (int i = from; i <= to; i++) {
+        if(isPrime(i)) {
+          lock_guard<mutex> lock(primes_mutex);
+          primes.emplace_back(i);
+        }
+      }
+    }));
+  }
   
-//   for(int i = 0; i < (int)threads.size(); i++) {
-//     threads.at(i).join();
-//   }
+  for(int i = 0; i < (int)threads.size(); i++) {
+    threads.at(i).join();
+  }
   
-//   for(int i = 0; i < (int)primes.size(); i++) {
-//     cout << primes.at(i) << endl;
-//   }
-// }
+  for(int i = 0; i < (int)primes.size(); i++) {
+    cout << primes.at(i) << endl;
+  }
+}
 
 
 
