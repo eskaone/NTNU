@@ -65,3 +65,6 @@
   - [Øving 9](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving9)
   - [Øving 11](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving11)
   
+### ~2017V~
+- **TDAT2004** - Datakommunikasjon med nettverksprogrammering:
+  - [Øving 1](https://github.com/haakonrp/NTNU/tree/master/2017V/TDAT2004(datakom_nettprog)/Oving1)
