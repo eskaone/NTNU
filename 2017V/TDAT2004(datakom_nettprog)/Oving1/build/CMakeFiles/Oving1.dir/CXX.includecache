@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/qwop/Documents/NTNU/Nettverksprog/Oving1/main.cpp
+iostream
+-
+thread
+-
+mutex
+-
+vector
+-
+cmath
+-
+

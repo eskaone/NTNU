@@ -1,0 +1,3 @@
+/home/qwop/Documents/NTNU/Nettverksprog/Oving1/build/CMakeFiles/edit_cache.dir
+/home/qwop/Documents/NTNU/Nettverksprog/Oving1/build/CMakeFiles/rebuild_cache.dir
+/home/qwop/Documents/NTNU/Nettverksprog/Oving1/build/CMakeFiles/Oving1.dir
