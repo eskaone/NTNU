@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 class SocketClient {
   public static void main(String[] args) throws IOException {
-    final int PORTNR = 1250;
+    final int PORT = 1250;
 
     Scanner readFromCmd = new Scanner(System.in);
     InetAddress address = InetAddress.getLocalHost();
 
-    Socket s = new Socket(address, PORTNR);
+    Socket s = new Socket("localhost", PORT);
     System.out.println("Connection established.");
 
     InputStreamReader readConn = new InputStreamReader(s.getInputStream());
     BufferedReader reader = new BufferedReader(readConn);
     PrintWriter writer = new PrintWriter(s.getOutputStream(), true);
 
-    writer.println("Connection established: " + address + ":" + PORTNR);
+    writer.println("Connection established: " + address + ":" + PORT);
     String setupInfo = reader.readLine();
     System.out.println(setupInfo);
 
