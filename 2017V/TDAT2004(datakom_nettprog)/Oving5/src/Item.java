@@ -45,7 +45,7 @@ public class Item {
     }
 
     public synchronized boolean changeInventory(int change) {
-        System.out.println("Endrer lagerbeholdning:\nItem id: " + id + "\nChange: " + change);
+        System.out.println("Changing inventory:\nItem id: " + id + "\nChange: " + change);
         if (inStorage + change < 0) return false;
         else {
             inStorage += change;
