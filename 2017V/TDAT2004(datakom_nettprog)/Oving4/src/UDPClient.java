@@ -20,26 +20,14 @@ class UDPClient {
     byte[] sendData = new byte[1024];
     byte[] receiveData = new byte[1024];
 
-    String operation = "";
+    String data = "";
 
-    while(!operation.equals("exit")) {
+    while(!data.equals("exit")) {
       System.out.println("Enter two numbers to calculate with:");
 
-      String num1 = reader.readLine();
-      sendData = num1.getBytes();
+      data = reader.readLine();
+      sendData = data.getBytes();
       DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, address, PORT);
-      ds.send(sendPacket);
-
-      String num2 = reader.readLine();
-      sendData = num2.getBytes();
-      sendPacket = new DatagramPacket(sendData, sendData.length, address, PORT);
-      ds.send(sendPacket);
-
-      System.out.println("Write (a)dd or (s)ub to calculate " + num1 + " +/- " + num2 + ": (or close connection with exit)");
-
-      operation = reader.readLine();
-      sendData = operation.getBytes();
-      sendPacket = new DatagramPacket(sendData, sendData.length, address, PORT);
       ds.send(sendPacket);
 
       DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);

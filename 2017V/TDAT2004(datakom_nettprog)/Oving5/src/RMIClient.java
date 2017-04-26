@@ -4,7 +4,7 @@ import java.rmi.Naming;
 
 public class RMIClient {
     public static void main(String[] args) throws Exception{
-        Register register = (Register)Naming.lookup("//localhost/RegisterImpl");
+        Register register = (Register)Naming.lookup("rmi://10.20.208.57:1099/RegisterImpl");
         String input = JOptionPane.showInputDialog("Enter ID of item: [Exit with blank]");
         while (!input.equals("")) {
             int id = Integer.parseInt(input);

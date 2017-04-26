@@ -18,7 +18,7 @@ public class RMIServer {
 
         RegisterImpl register = new RegisterImpl();
         // Bind this object instance to the name "RmiServer"
-        Naming.rebind("//localhost/RegisterImpl", register);
+        Naming.rebind("rmi://10.20.203.254:1099/RegisterImpl", register);
         System.out.println("PeerServer bound in registry");
         register.registerItem(1,"a","genericSupplier",100,10);
         register.registerItem(2,"b","genericSupplier",100,10);
