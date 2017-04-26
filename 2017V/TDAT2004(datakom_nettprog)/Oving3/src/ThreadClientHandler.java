@@ -29,24 +29,21 @@ public class ThreadClientHandler extends Thread {
             System.out.println(reader.readLine());
             writer.println("Connected with server side.");
 
-            String num1 = reader.readLine();
-            String num2 = reader.readLine();
-            String operation = reader.readLine();
-            System.out.println("Input from client: " + num1 + " " + operation + " " + num2);
+            String data = reader.readLine();
+            System.out.println("Input from client: " + data);
 
-            while (!operation.equals("exit")) {
-                if(operation.equals("add") && num1.matches("-?\\d+(\\.\\d+)?") && num2.matches("-?\\d+(\\.\\d+)?")) {
-                    writer.println(num1 + " + " + num2 + " = " + (Integer.parseInt(num1) + Integer.parseInt(num2)));
-                } else if(operation.equals("sub") && num1.matches("-?\\d+(\\.\\d+)?") && num2.matches("-?\\d+(\\.\\d+)?")) {
-                    writer.println(num1 + " - " + num2 + " = " + (Integer.parseInt(num1) - Integer.parseInt(num2)));
+            while (!data.equals("exit")) {
+                String[] dataTbl = data.split(" ");
+                if(dataTbl[1].equals("+")) {
+                    writer.println(data + " = " + (Integer.parseInt(dataTbl[0]) + Integer.parseInt(dataTbl[2])));
+                } else if(dataTbl[1].equals("-")) {
+                    writer.println(data + " = " + (Integer.parseInt(dataTbl[0]) - Integer.parseInt(dataTbl[2])));
                 } else {
                     writer.println("Wrong input. Try again...");
                     System.out.println("Wrong input from client...");
                 }
-                num1 = reader.readLine();
-                num2 = reader.readLine();
-                operation = reader.readLine();
-                System.out.println("Input from client: " + num1 + " " + operation + " " + num2);
+                data = reader.readLine();
+                System.out.println("Input from client: " + data);
             }
 
             reader.close();

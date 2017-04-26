@@ -35,7 +35,7 @@ class UDPClient {
       sendPacket = new DatagramPacket(sendData, sendData.length, address, PORT);
       ds.send(sendPacket);
 
-      System.out.println("Write add or sub to calculate " + num1 + " +/- " + num2 + ": (or close connection with exit)");
+      System.out.println("Write (a)dd or (s)ub to calculate " + num1 + " +/- " + num2 + ": (or close connection with exit)");
 
       operation = reader.readLine();
       sendData = operation.getBytes();

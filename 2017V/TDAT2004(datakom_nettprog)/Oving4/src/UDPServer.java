@@ -34,13 +34,13 @@ class UDPServer {
       InetAddress addressPacket = dp.getAddress();
       int portPacket = dp.getPort();
 
-      if(operation.equals("add") && num1.matches("-?\\d+(\\.\\d+)?") && num2.matches("-?\\d+(\\.\\d+)?")) {
+      if(operation.equals("a") && num1.matches("-?\\d+(\\.\\d+)?") && num2.matches("-?\\d+(\\.\\d+)?")) {
         String add = num1 + " + " + num2 + " = " + (Integer.parseInt(num1) + Integer.parseInt(num2));
         System.out.println(add);
         sendData = add.getBytes();
         dp = new DatagramPacket(sendData, sendData.length, addressPacket, portPacket);
         ds.send(dp);
-      } else if(operation.equals("sub") && num1.matches("-?\\d+(\\.\\d+)?") && num2.matches("-?\\d+(\\.\\d+)?")) {
+      } else if(operation.equals("s") && num1.matches("-?\\d+(\\.\\d+)?") && num2.matches("-?\\d+(\\.\\d+)?")) {
         String sub = num1 + " - " + num2 + " = " + (Integer.parseInt(num1) - Integer.parseInt(num2));
         System.out.println(sub);
         sendData = sub.getBytes();

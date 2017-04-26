@@ -21,24 +21,16 @@ class SocketClient {
     System.out.println(setupInfo);
 
     System.out.println("\nEnter two numbers to calculate with:");
-    String num1 = readFromCmd.nextLine();
-    String num2 = readFromCmd.nextLine();
-    System.out.println("Write add or sub to calculate " + num1 + " +/- " + num2 + ": (or quit with exit)");
-    String operation = readFromCmd.nextLine();
+    String data = readFromCmd.nextLine();
 
-    while (!operation.equals("exit")) {
-      writer.println(num1);
-      writer.println(num2);
-      writer.println(operation);
+    while (!data.equals("exit")) {
+      writer.println(data);
 
       String response = reader.readLine();
       System.out.println("Echo from server: " + response);
 
       System.out.println("\nEnter two numbers to calculate with:");
-      num1 = readFromCmd.nextLine();
-      num2 = readFromCmd.nextLine();
-      System.out.println("Write add or sub to calculate " + num1 + " +/- " + num2 + ": (or quit with exit)");
-      operation = readFromCmd.nextLine();
+      data = readFromCmd.nextLine();
     }
 
     reader.close();
