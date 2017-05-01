@@ -1,7 +1,7 @@
 # NTNU - Bachelor i dataingeniør
 *Readme vil bli oppdatert minst en gang for hvert semester(ish). Last update to readme: 03/11-16*
 
-### ~2015H~
+### 2015H
 - **TDAT1001** - Programmering grunnkurs:
   - [Øving 1](https://github.com/haakonrp/NTNU/tree/master/2015H/TDAT1001(prog_gk)/Oving1)
   - [Øving 2](https://github.com/haakonrp/NTNU/tree/master/2015H/TDAT1001(prog_gk)/Oving2)
@@ -23,7 +23,7 @@
   - [Lejos Useless-Machine](https://github.com/haakonrp/NTNU/tree/master/2015H/TDAT1007(ing_ife)/lejos-useless_machine)
   - [Lejos org](https://github.com/SuRoMoTeHfGo)
 
-### ~2016V~
+### 2016V
 - **TDAT1005** - Videregående programmering med databaser:
   - [Øving 1](https://github.com/haakonrp/NTNU/tree/master/2016V/TDAT1005(prog_vp_db)/Oving1)
   - [Øving 2](https://github.com/haakonrp/NTNU/tree/master/2016V/TDAT1005(prog_vp_db)/Oving2)
@@ -43,7 +43,7 @@
   - [Catering-system](https://github.com/haakonrp/NTNU/tree/master/2016V/TDAT1006(sys_utvkl_1)/Catering-System/)
   - [Catering-system org](https://github.com/Byte-Me/Catering-System)
   
-### ~2016H~
+### 2016H
 - **TDAT2001** - Realfag:
   - [Øving 3](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2001(realfag)/Oving3)
 - **TDAT2003** - Systemutvikling 2:
@@ -65,7 +65,7 @@
   - [Øving 9](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving9)
   - [Øving 11](https://github.com/haakonrp/NTNU/tree/master/2016H/TDAT2005(alg_dat)/Oving11)
   
-### ~2017V~
+### 2017V
 - **TDAT2003** - Systemutvikling 2:
   - [Scrumprosjekt (Min Vakt org)](https://github.com/Scrum-m8s/MinVakt)
 - **TDAT2004** - Datakommunikasjon med nettverksprogrammering:
