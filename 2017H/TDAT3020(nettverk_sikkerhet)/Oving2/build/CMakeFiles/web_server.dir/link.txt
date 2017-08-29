@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++1y -Wall -Wextra -Wno-unused-parameter   CMakeFiles/web_server.dir/main.cpp.o  -o web_server -rdynamic -lpthread -lboost_regex -lboost_system -lboost_thread -lboost_date_time -lboost_chrono -lboost_atomic -lpthread 

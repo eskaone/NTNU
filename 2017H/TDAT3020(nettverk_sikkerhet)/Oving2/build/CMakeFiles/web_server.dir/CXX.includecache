@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/qwop/Documents/GitHub/NTNU/2017H/TDAT3020(nettverk_sikkerhet)/Oving2/main.cpp
+server_http.hpp
+/home/qwop/Documents/GitHub/NTNU/2017H/TDAT3020(nettverk_sikkerhet)/Oving2/server_http.hpp
+
+/home/qwop/Documents/GitHub/NTNU/2017H/TDAT3020(nettverk_sikkerhet)/Oving2/server_http.hpp
+boost/asio.hpp
+-
+boost/regex.hpp
+-
+boost/algorithm/string/predicate.hpp
+-
+boost/functional/hash.hpp
+-
+unordered_map
+-
+thread
+-
+functional
+-
+iostream
+-
+sstream
+-
+
