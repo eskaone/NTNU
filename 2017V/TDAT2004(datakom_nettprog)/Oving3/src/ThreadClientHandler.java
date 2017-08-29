@@ -35,9 +35,11 @@ public class ThreadClientHandler extends Thread {
             while (!data.equals("exit")) {
                 String[] dataTbl = data.split(" ");
                 if(dataTbl[1].equals("+")) {
-                    writer.println(data + " = " + (Integer.parseInt(dataTbl[0]) + Integer.parseInt(dataTbl[2])));
+                    writer.println(data + " = " +
+                            (Integer.parseInt(dataTbl[0]) + Integer.parseInt(dataTbl[2])));
                 } else if(dataTbl[1].equals("-")) {
-                    writer.println(data + " = " + (Integer.parseInt(dataTbl[0]) - Integer.parseInt(dataTbl[2])));
+                    writer.println(data + " = " +
+                            (Integer.parseInt(dataTbl[0]) - Integer.parseInt(dataTbl[2])));
                 } else {
                     writer.println("Wrong input. Try again...");
                     System.out.println("Wrong input from client...");

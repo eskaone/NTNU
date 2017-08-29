@@ -27,7 +27,6 @@ customers.push(new Customer("Per", "Tromsø"));
 
 //Get all customers
 app.get('/customers', (request, response) => {
-  //sending for instance: [{"id":1,"name":"Ola"}, {"id":2,"name":"Kari"}, {"id":3,"name":"Per"}]
   var customer_id_and_names=[]
   for(var c=0;c<customers.length;c++) {
     customer_id_and_names.push({id: customers[c].id, name: customers[c].name});
