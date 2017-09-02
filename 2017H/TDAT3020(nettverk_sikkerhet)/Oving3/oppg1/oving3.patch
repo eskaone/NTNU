@@ -1,0 +1,10 @@
+--- oving3_v1.c	2017-08-30 14:22:57.950949190 +0200
++++ oving3_v2.c	2017-08-30 14:24:42.574924773 +0200
+@@ -1,5 +1,6 @@
+ #include <stdio.h> 
+ 
+ int main() {
+-printf("Hello World\n");
++printf("Hello Oving3\n");
++return 0;
+ }
