@@ -18,7 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, MouseListener{
+public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
 
     private double angle;
     private GLU glu = new GLU();
@@ -27,12 +27,12 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
     private double rotDeg = 0;
     private boolean rotDir = true;
     private boolean rotSide = true;
+    private boolean swapSide = false;
 
     public Oving4(GLCapabilities c){
         super(c);
         this.addGLEventListener(this);
         this.addKeyListener(this);
-        this.addMouseListener(this);
         final FPSAnimator animator = new FPSAnimator(this, 120);
         animator.start();
 
@@ -82,47 +82,35 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-        glu.gluLookAt(2, 3, 9, 0, 0, 0, 0, 1, 0); //(pos x, pos y, pos z, look x, look y, look z, boolean x, y, z up);
+        glu.gluLookAt(6, 4, 6, 0, 0, 0, 0, 1, 0); //(pos x, pos y, pos z, look x, look y, look z, boolean x, y, z up);
 
-        gl.glRotated(angle, 0, 1, 0);
-
-
-        //FIXME: buggy
-        //glu.gluLookAt(camPos*0.1f,0, camZoom*0.1f, lookX*0.01f, lookY*0.01f, 0, 0, 1, 0);
+        //gl.glRotated(angle, 0, 1, 0);
 
         //x,y,z-axis
-
         drawAxis(gl, 10);
 
-        //drawSurfaceBlock(gl,0);
-        //gl.glTranslatef(1f, 0f, 0f);
-        //gl.glRotatef(90, 0, 1, 0);
-        //drawSurfaceBlock(gl,1);
+        if(swapSide) {
+            gl.glRotatef(-90, 1, 0, 0);
+        }
+
+        //gl.glRotatef(90, 0, 0, 1);
 
         /*
-        drawSurface(gl, 3, 3, 0);
-        gl.glTranslatef(0, -3, 0);
-        gl.glRotatef(90, 1, 0, 0);
-        drawSurface(gl, 3, 3, 1);
-        gl.glTranslatef(0, -3, 0);
-        gl.glRotatef(90, 0, 1, 0);
-        drawSurface(gl, 3, 3, 2);
-        gl.glTranslatef(0, 0, 3);
+        gl.glPopMatrix();
+        gl.glPushMatrix();
+        gl.glRotatef(90, 0, 0, 1);
+
+        gl.glPopMatrix();
+        gl.glPushMatrix();
         gl.glRotatef(-90, 1, 0, 0);
-        drawSurface(gl, 3, 3, 4);
-        gl.glTranslatef(0, -3, 0);
-        gl.glRotatef(-90, 1, 0, 0);
-        drawSurface(gl, 3, 3, 3);
-        gl.glTranslatef(3, -3, 3);
-        gl.glRotatef(90, 0, 1, 0);
-        drawSurface(gl, 3, 3, 5);
         */
 
-        //gl.glRotated(rotDeg, 1, 0, 0);
+        drawRubiksCube(gl);
+    }
 
-
+    private void drawRubiksCube(GL2 gl) {
         gl.glPushMatrix();
-        gl.glRotated(rotDeg, 0, 0, 1);
+        //gl.glRotated(rotDeg, 0, 0, 1);
         gl.glTranslatef(-1.5f, -1.5f, -1.5f);
         drawRubiksSide(gl);
         gl.glPopMatrix();
@@ -134,19 +122,15 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
         gl.glPopMatrix();
 
         gl.glPushMatrix();
-        //gl.glRotated(rotDeg, 0, 0, 1);
+        gl.glRotated(rotDeg, 0, 0, 1);
         gl.glTranslatef(-1.5f, -1.5f, 0.5f);
         drawRubiksSide(gl);
         gl.glPopMatrix();
-
-
-
-
     }
 
     private void update() {
         //cam
-        angle += 0.5;
+        angle += 0.3;
         if(angle > 360) {
             angle -= 360;
         }
@@ -156,7 +140,9 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
         double[] bp = {-360, -270, -180, -90, 0, 90, 180, 270, 360};
         for(int i = 0; i < bp.length; i++) {
             if(!rotSide && rotDeg == bp[i]) {
-                System.out.println("helo");
+                swapSide = true;
+            } else if(rotSide && rotDeg == bp[i]) {
+                swapSide = false;
             }
         }
 
@@ -254,125 +240,6 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
         drawSurface(gl, size, 5);
     }
 
-    private void drawPolygon(GL2 gl, int a, int b, int c, int d) {
-        final float corners[][] = {{-1f,-0.1f,0.1f}, {-0.1f,0.1f,0.1f}, {0.1f,0.1f,0.1f}, {0.1f,-0.1f,0.1f}, {-0.1f,-0.1f,-0.1f}, {-0.1f,0.1f,-0.1f}, {0.1f,0.1f,-0.1f}, {0.1f,-0.1f,-0.1f}};
-        final float colors[][] = {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.5f, 0.0f}};
-
-        gl.glColor3fv(colors[a],0);
-        gl.glBegin(GL_QUADS);
-        {
-            gl.glVertex3fv(corners[a],1);
-            gl.glVertex3fv(corners[b],1);
-            gl.glVertex3fv(corners[c],1);
-            gl.glVertex3fv(corners[d],1);
-        }
-        gl.glEnd();
-    }
-
-    private void drawRubiks2(GL2 gl) {
-        final float[][] colors = {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.5f, 0.0f}};
-        float[] sides = new float[6];
-        float[][] pieces = new float[6][9];
-
-        for(int i = 0; i < 6; i++) {
-            for(int j = 0; j < 9; j++) {
-            }
-        }
-    }
-
-    private void drawRubiks(GL2 gl) {
-        //glut.glutSolidCube(1f);
-        //gl.glTranslatef(0f, 0f, 7f);
-        final float colors[][] = {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.5f, 0.0f}};
-        for(int i = 0; i < 1; i++) {
-            switch(i) {
-                case 0:
-                    gl.glTranslatef(-0.33f, 0.33f, 0.33f);
-
-                    gl.glColor3fv(colors[i], 1);
-                    for(int j = 0; j < 11; j++) {
-                        if(j == 3) {
-                            gl.glTranslatef(-0.99f, -0.33f, 0f);
-                            glut.glutSolidCube(0.32f);
-                        } else if(j == 7) {
-                            gl.glTranslatef(-0.99f, -0.33f, 0f);
-                            glut.glutSolidCube(0.32f);
-                        } else {
-                            glut.glutSolidCube(0.32f);
-                            gl.glTranslatef(0.33f, 0f, 0f);
-                        }
-                    }
-
-                    break;
-
-                case 1:
-                    gl.glTranslatef(-0.33f, 0.33f, 0.33f);
-                    gl.glColor3fv(colors[i], 1);
-                    for(int j = 0; j < 9; j++) {
-                        gl.glPushMatrix();
-
-                        if(j == 3 || j == 7) {
-                            gl.glPopMatrix();
-                            gl.glTranslatef(0f, -0.33f, 0f);
-                            glut.glutSolidCube(0.32f);
-                        } else {
-                            glut.glutSolidCube(0.32f);
-                            gl.glTranslatef(0.33f, 0f, 0f);
-                        }
-                    }
-
-                    break;
-
-                case 2:
-                    gl.glPushMatrix();
-                    gl.glColor3fv(colors[i], 1);
-                    for(int j = 0; j < 9; j++) {
-                        gl.glTranslatef(-0.33f*(float)j, 0.33f, 0);
-                        glut.glutSolidCube(0.32f);
-                    }
-                    gl.glPopMatrix();
-
-                    break;
-
-                case 3:
-                    gl.glPushMatrix();
-                    gl.glColor3fv(colors[i], 1);
-                    for(int j = 0; j < 9; j++) {
-                        gl.glTranslatef(-0.33f*(float)j, 0.33f, 0);
-                        glut.glutSolidCube(0.32f);
-                    }
-                    gl.glPopMatrix();
-
-                    break;
-
-                case 4:
-                    gl.glPushMatrix();
-                    gl.glColor3fv(colors[i], 1);
-                    for(int j = 0; j < 9; j++) {
-                        gl.glTranslatef(-0.33f*(float)j, 0.33f, 0);
-                        glut.glutSolidCube(0.32f);
-                    }
-                    gl.glPopMatrix();
-
-                    break;
-
-                case 5:
-                    gl.glPushMatrix();
-                    gl.glColor3fv(colors[i], 1);
-                    for(int j = 0; j < 9; j++) {
-                        gl.glTranslatef(-0.33f*(float)j, 0.33f, 0);
-                        glut.glutSolidCube(0.32f);
-                    }
-                    gl.glPopMatrix();
-
-                    break;
-
-
-            }
-        }
-    }
-
-
     private void drawAxis(GL2 gl, float length) {
         //axis
         gl.glBegin(GL_LINES);
@@ -387,9 +254,9 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
         gl.glVertex3f(0f, 0f, -length);
         gl.glEnd();
 
+        //counters
         gl.glColor3f(1f, 1f, 1f);
         gl.glLineWidth(3f);
-        //counters
         gl.glBegin(GL_LINES);
         for(int i = (int) -length; i < length; i++) {
             gl.glVertex3f(((float) i), 0.05f, 0f);
@@ -413,7 +280,6 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
     public void display(GLAutoDrawable glDrawable) {
         update();
         drawGLScene(glDrawable);                      // Calls drawGLScene
-
     }
 
 
@@ -437,61 +303,44 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener, Mo
 
     @Override
     public void keyPressed(KeyEvent e) {
+        switch (e.getKeyChar()) {
+            case KeyEvent.VK_ESCAPE:
+                System.exit(0);
+                break;
 
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            rotSide = true;
-            rotDir = true;
-        }
+            case KeyEvent.VK_UP:
+                rotSide = true;
+                rotDir = true;
+                break;
 
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            rotSide = true;
-            rotDir = false;
-        }
+            case KeyEvent.VK_DOWN:
+                rotSide = true;
+                rotDir = false;
+                break;
 
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            rotSide = false;
-            rotDir = true;
-        }
+            case KeyEvent.VK_RIGHT:
+                rotSide = false;
+                rotDir = true;
+                break;
 
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            rotSide = false;
-            rotDir = false;
-        }
+            case KeyEvent.VK_LEFT:
+                rotSide = false;
+                rotDir = false;
+                break;
 
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            if(getAnimator().isPaused()) {
-                getAnimator().resume();
-            } else {
-                getAnimator().pause();
-            }
+            case KeyEvent.VK_SPACE:
+                if(getAnimator().isPaused()) {
+                    getAnimator().resume();
+                } else {
+                    getAnimator().pause();
+                }
+                break;
+
+            default:
+                break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {}
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }
