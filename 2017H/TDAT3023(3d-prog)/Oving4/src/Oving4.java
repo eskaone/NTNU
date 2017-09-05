@@ -92,23 +92,10 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         if(swapSide) {
             gl.glRotatef(-90, 1, 0, 0);
         }
-
-        //gl.glRotatef(90, 0, 0, 1);
-
-        /*
-        gl.glPopMatrix();
-        gl.glPushMatrix();
-        gl.glRotatef(90, 0, 0, 1);
-
-        gl.glPopMatrix();
-        gl.glPushMatrix();
-        gl.glRotatef(-90, 1, 0, 0);
-        */
-
-        drawRubiksCube(gl);
+        drawRubiksCubeFull(gl);
     }
 
-    private void drawRubiksCube(GL2 gl) {
+    private void drawRubiksCubeFull(GL2 gl) {
         gl.glPushMatrix();
         //gl.glRotated(rotDeg, 0, 0, 1);
         gl.glTranslatef(-1.5f, -1.5f, -1.5f);
@@ -127,37 +114,6 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         drawRubiksSide(gl);
         gl.glPopMatrix();
     }
-
-    private void update() {
-        //cam
-        angle += 0.3;
-        if(angle > 360) {
-            angle -= 360;
-        }
-
-
-        //rubiks
-        double[] bp = {-360, -270, -180, -90, 0, 90, 180, 270, 360};
-        for(int i = 0; i < bp.length; i++) {
-            if(!rotSide && rotDeg == bp[i]) {
-                swapSide = true;
-            } else if(rotSide && rotDeg == bp[i]) {
-                swapSide = false;
-            }
-        }
-
-
-        if(rotDir) {
-            rotDeg += 0.5;
-        } else {
-            rotDeg -= 0.5;
-        }
-        if(rotDeg > 360 || rotDeg < -360) {
-            rotDeg = 0;
-        }
-        System.out.println("rotDeg: " + rotDeg);
-    }
-
 
     private void drawRubiksSide(GL2 gl) {
         gl.glPushMatrix();
@@ -187,18 +143,21 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         drawRubiksCube(gl,1);
         gl.glPopMatrix();
 
+
     }
 
     private void drawSurfaceBlock(GL2 gl, int color) {
         float[][] coords = {{0,1,0},{1,1,0},{1,0,0},{0,0,0}};
         final float colors[][] = {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.5f, 0.0f}, {0f, 0f, 0f}};
         gl.glColor3fv(colors[color], 0);
+        gl.glPushMatrix();
         gl.glBegin(GL_QUADS);
         gl.glVertex3fv(coords[0], 0);
         gl.glVertex3fv(coords[1], 0);
         gl.glVertex3fv(coords[2], 0);
         gl.glVertex3fv(coords[3], 0);
         gl.glEnd();
+        gl.glPopMatrix();
 
         gl.glColor3fv(colors[6], 0);
         gl.glLineWidth(2f);
@@ -222,6 +181,7 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
 
     private void drawRubiksCube(GL2 gl, int size) {
         gl.glTranslatef(-((float)size/2), -((float)size/2), -((float)size/2));
+        gl.glPushMatrix();
         drawSurface(gl, size, 0);
         gl.glTranslatef(0, -size, 0);
         gl.glRotatef(90, 1, 0, 0); //90 deg
@@ -238,6 +198,34 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         gl.glTranslatef(size, -size, size);
         gl.glRotatef(90, 0, 1, 0);
         drawSurface(gl, size, 5);
+    }
+
+    private void update() {
+        //cam
+        angle += 0.3;
+        if(angle > 360) {
+            angle -= 360;
+        }
+
+        //rubiks
+        double[] bp = {-360, -270, -180, -90, 0, 90, 180, 270, 360};
+        for(int i = 0; i < bp.length; i++) {
+            if(!rotSide && rotDeg == bp[i]) {
+                swapSide = true;
+            } else if(rotSide && rotDeg == bp[i]) {
+                swapSide = false;
+            }
+        }
+
+        if(rotDir) {
+            rotDeg += 0.5;
+        } else {
+            rotDeg -= 0.5;
+        }
+        if(rotDeg > 360 || rotDeg < -360) {
+            rotDeg = 0;
+        }
+        System.out.println("rotDeg: " + rotDeg);
     }
 
     private void drawAxis(GL2 gl, float length) {
@@ -303,7 +291,7 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyChar()) {
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
                 break;
