@@ -1,18 +1,5 @@
-//package jogl_test2;
-
-/*
-
-TegningOv1_1JOGL.java   JHN 2015-08-10 Tomas Holt 2015-08-15
-
-Draws one triangle  JOGL versjon 2 binding towards OpenGL
-
-*/
-
-
-import javax.swing.*; // klassene JFrame og JPanel
-
-//NYE IMPORTS AV TOMAS
-import static com.jogamp.opengl.GL2.*;//slipper å bruke GL2.konstant
+import javax.swing.*;
+import static com.jogamp.opengl.GL2.*;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.GLEventListener;
@@ -31,19 +18,6 @@ import java.awt.event.KeyListener;
 
 public class Oving3 extends GLCanvas implements GLEventListener, KeyListener{
 
-    	/* interfacet GLEventListener innholder de 5 metodene som må implemeenteres:
-                - display(GLDrawable drawable)
-	          	Called by the drawable to initiate OpenGL rendering by the client
-                - displayChanged(GLDrawable drawable, boolean modeChanged, boolean deviceChanged)
-	          	Called by the drawable when the display mode or the display device associated with the GLDrawable has changed.
-                - init(GLDrawable drawable)
-	          	Called by the drawable immediately after the OpenGL context is initialized.
-                - reshape(GLDrawable drawable, int x, int y, int width, int height)
-	          	Called by the drawable during the first repaint after the component has been resized.
-                -dispose(GLAutoDrawable d)
-      */
-
-    private float angle;
     private GLU glu = new GLU();
     private float number = 1.0f;
     private GLUT glut = new GLUT();
@@ -51,28 +25,23 @@ public class Oving3 extends GLCanvas implements GLEventListener, KeyListener{
     private float cUpDown = 0f;
     private float cLeftRight = 0f;
 
-    //konstruktor
     public Oving3(GLCapabilities c){
-
         super(c);
         this.addGLEventListener(this);
         this.addKeyListener(this);
         final FPSAnimator animator = new FPSAnimator(this, 120);
-        animator.start(); //uncomment to start animator
-
+        animator.start();
     }
 
     public void init(GLAutoDrawable glDrawable) {
         System.out.println("init()");
-        GL2 gl = glDrawable.getGL().getGL2();	//GL gl = glDrawable.getGL(); TOMAS	//Get the GL object from glDrawable
+        GL2 gl = glDrawable.getGL().getGL2();
 
         gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Sets the background color to white
 
         gl.glMatrixMode(GL_PROJECTION);       // Select The Projection Matrix
         gl.glLoadIdentity(); 					  // Reset the view matrix to the identity matrix
         glu.gluPerspective(60.0,1.25,1.0,150);// Spesifize the projection matrix (fov, w/h, near plane, far plane)
-        //gl.glFrustum(- 3, 3, -3,  3, 1, 9);	  // Definerer en matrise for perspektivtransformasjon
-        //gl.glOrtho(- 3, 3, -3,  3, -10, 10);	  // Ortogonalprojeksjon
         glu.gluLookAt(2, 2, 7, 0, 0, 0, 0, 1, 0);
 
         gl.glMatrixMode(GL_MODELVIEW);
@@ -183,31 +152,23 @@ public class Oving3 extends GLCanvas implements GLEventListener, KeyListener{
         gl.glEnd();
     }
 
-
-    /** void display() Draw to the canvas. */
-    /* Purely a Java thing. Simple calls drawGLScene once GL is initialized */
-
     public void display(GLAutoDrawable glDrawable) {
-        GL2 gl = glDrawable.getGL().getGL2();
         update();
-        drawGLScene(glDrawable);                      // Calls drawGLScene
-
+        drawGLScene(glDrawable);
     }
 
     private void update() {
         rotDeg = (rotDeg > 360) ? 0 : rotDeg + 0.5;
     }
 
-    public void displayChanged(GLAutoDrawable glDrawable, boolean b, boolean b1) {
-        //  Must be present due to the GLEventListener interface
-    }
+    public void displayChanged(GLAutoDrawable glDrawable, boolean b, boolean b1) {}
 
     public static void main(String[] args){
-        GLCanvas canvas = new Oving3(null);//null => setter ingen egenskaper for context
+        GLCanvas canvas = new Oving3(null);
         canvas.setPreferredSize(new Dimension(1280,1024));
 
-        final JFrame frame = new JFrame(); // Swing's JFrame or AWT's Frame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lukk appen med kryss
+        final JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(canvas);
 
         frame.setTitle("Oving3");
@@ -217,9 +178,7 @@ public class Oving3 extends GLCanvas implements GLEventListener, KeyListener{
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -250,7 +209,5 @@ public class Oving3 extends GLCanvas implements GLEventListener, KeyListener{
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
+    public void keyReleased(KeyEvent e) {}
 }
