@@ -1,0 +1,10 @@
+#!/bin/sh
+echo Jeg heter `whoami`
+echo 
+MASKIN=`hostname`
+echo $MASKIN
+echo
+`which ls`
+echo
+`echo ls -al`
+echo

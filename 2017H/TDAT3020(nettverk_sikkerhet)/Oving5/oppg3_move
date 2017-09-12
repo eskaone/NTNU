@@ -1,0 +1,7 @@
+#!/bin/sh
+#Parameteren $1 er filnavn m. katalog
+#Beregn katalognavn utfra filnavn
+JPGDIR=`dirname $1`/jpg
+echo "$JPGDIR"
+#Opprett hvis den ikke fins fra før
+mkdir -p $JPGDIR && mv $1 $JPGDIR && echo "Success!";

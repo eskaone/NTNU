@@ -1,0 +1,2 @@
+#!/bin/sh
+find ./testlib/oppg3/ -path '*/jpg/*' -exec ls -lh '{}' \; -exec ./oppg3_revert_move {} \; 

@@ -1,0 +1,7 @@
+#!/bin/sh
+clear
+if find ./testlib/oppg2 -type f ! -name "*.zip" -mtime +7 -size +10b -exec ls -lh {} \; -exec gzip {} \;
+then echo "Files compressed!";
+else echo "Something went wrong...";
+fi 
+

@@ -1,0 +1,2 @@
+#!/bin/sh
+find ./testlib/oppg4/  -name "*.txt" -exec ls -lh '{}' \; -exec cp '{}' '{}.kopi' \;

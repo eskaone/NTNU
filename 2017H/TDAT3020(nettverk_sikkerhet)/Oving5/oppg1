@@ -1,0 +1,10 @@
+#!/bin/sh
+clear
+mkdir -p downloads && cd downloads/ ;
+
+if wget -O img.jpg https://media.mnn.com/assets/images/2016/08/dragonfly-lead.jpg.653x0_q80_crop-smart.jpg; 
+then echo "Download complete!"; 
+else echo "Download failed...";
+fi
+
+xdg-open "img.jpg"

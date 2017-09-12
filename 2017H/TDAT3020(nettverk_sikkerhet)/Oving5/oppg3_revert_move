@@ -1,0 +1,4 @@
+#!/bin/sh
+JPGDIR=`dirname $1`
+MVDIR=`dirname $JPGDIR`
+mv $1 $MVDIR && rmdir $JPGDIR && echo "Success!";

@@ -1,0 +1,4 @@
+#!/bin/sh
+clear
+find ./testlib/oppg2 -type f -name "*.zip" -o -name "*.gz" -exec ls -lh {} \; -exec gzip -d {} \;
+echo "Files decompressed!"

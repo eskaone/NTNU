@@ -1,5 +1,3 @@
-CC=clang
-CFLAGS=-O2
 DEPS=fargeskrift.h
 
 .PHONY: all clean install
@@ -15,8 +13,8 @@ fargedemo: fargedemo.c fargeskrift.c fargeskrift.h
 fargetest: fargetest.c fargeskrift.c fargeskrift.h
 	gcc -O2 -o fargetest fargetest.c fargeskrift.c
 
-oppg3: oppg3.c fargeskrift.h
-	gcc -O2 -o oppg3 oppg3.c fargeskrift.c
+oppg3: oppg3.c fargeskrift.c fargeskrift.h
+	clang oppg3 oppg3.c fargeskrift.c
 
 clean:
 	rm -f *.o fargedemo fargetest
