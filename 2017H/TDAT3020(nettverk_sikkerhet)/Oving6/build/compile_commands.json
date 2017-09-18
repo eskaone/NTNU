@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/qwop/Documents/GitHub/openssl-example/build",
+  "command": "/usr/bin/c++      -std=c++1y -Wall -Wextra -Wno-unused-parameter   -o CMakeFiles/examples.dir/examples.cpp.o -c /home/qwop/Documents/GitHub/openssl-example/examples.cpp",
+  "file": "/home/qwop/Documents/GitHub/openssl-example/examples.cpp"
+},
+{
+  "directory": "/home/qwop/Documents/GitHub/openssl-example/build/tests",
+  "command": "/usr/bin/c++    -I/home/qwop/Documents/GitHub/openssl-example/tests/..   -std=c++1y -Wall -Wextra -Wno-unused-parameter   -o CMakeFiles/crypto_test.dir/crypto_test.cpp.o -c /home/qwop/Documents/GitHub/openssl-example/tests/crypto_test.cpp",
+  "file": "/home/qwop/Documents/GitHub/openssl-example/tests/crypto_test.cpp"
+}
+]

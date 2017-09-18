@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/qwop/Documents/GitHub/openssl-example/crypto.hpp
+openssl/evp.h
+-
+openssl/sha.h
+-
+openssl/md5.h
+-
+sstream
+-
+iomanip
+-
+string
+-
+
+/home/qwop/Documents/GitHub/openssl-example/examples.cpp
+crypto.hpp
+/home/qwop/Documents/GitHub/openssl-example/crypto.hpp
+iostream
+-
+

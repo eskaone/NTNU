@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++1y -Wall -Wextra -Wno-unused-parameter   CMakeFiles/Oving8.dir/main.cpp.o  -o Oving8 -rdynamic 
