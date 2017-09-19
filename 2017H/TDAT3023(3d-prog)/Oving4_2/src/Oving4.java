@@ -14,6 +14,7 @@ import com.jogamp.opengl.util.gl2.GLUT;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
 
@@ -25,13 +26,15 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
     private boolean rotDir = true;
     private boolean rotSide = true;
     private boolean swapSide = false;
+    private float hei = 1;
 
     public Oving4(GLCapabilities c){
         super(c);
         this.addGLEventListener(this);
         this.addKeyListener(this);
         final FPSAnimator animator = new FPSAnimator(this, 120);
-        animator.start();
+        //animator.start();
+
     }
 
     public void init(GLAutoDrawable glDrawable) {
@@ -43,7 +46,6 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         glu.gluPerspective(90.0,1.25,1.0,20.0);
         gl.glMatrixMode(GL_MODELVIEW);
         gl.glLoadIdentity();
-
 
         //LIGHT
 
@@ -79,123 +81,137 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-        glu.gluLookAt(6, 4, 6, 0, 0, 0, 0, 1, 0); //(pos x, pos y, pos z, look x, look y, look z, boolean x, y, z up);
+        glu.gluLookAt(0, 0, 6, 0, 0, 0, 0, 1, 0); //(pos x, pos y, pos z, look x, look y, look z, boolean x, y, z up);
 
         //gl.glRotated(angle, 0, 1, 0);
 
         //x,y,z-axis
         drawAxis(gl, 10);
 
-        if(swapSide) {
-            gl.glRotatef(-90, 1, 0, 0);
+        float[][][] vertices = {{{0,0,0},{1,0,0},{1,1,0},{0,1,0}},
+                                {{1,0,0},{2,0,0},{2,1,0},{1,1,0}},
+                                {{0,1,0},{1,1,0},{1,2,0},{0,2,0}},
+                                {{1,1,0},{2,1,0},{2,2,0},{1,2,0}}};
+
+
+        //white 0
+        //red 1
+        //green 2
+        //blue 3
+        //yellow 4
+        //orange 5
+
+        //TODO: create algorythm to update blocks with color
+        float[][] colors = {{1, 1, 1, hei}, {0, 0, 0, 0}, {3, 3, 3, 3}, {5, 5, 5, 5}, {4, 4, 4, 4}, {2, 2, 2, 2}};
+        float[][] colorsChanged = {{1, 1, 2, 2}, {0, 0, 0, 0}, {3, 3, 1, 1}, {5, 5, 3, 3}, {4, 4, 4, 4}, {2, 2, 5, 5}};
+
+
+        /*
+        float[][][] side0 = updateVertices(vertices, colorsChanged[0]);
+        float[][][] side1 = updateVertices(vertices, colorsChanged[1]);
+        float[][][] side2 = updateVertices(vertices, colorsChanged[2]);
+        float[][][] side3 = updateVertices(vertices, colorsChanged[3]);
+        float[][][] side4 = updateVertices(vertices, colorsChanged[4]);
+        float[][][] side5 = updateVertices(vertices, colorsChanged[5]);
+         */
+
+        /*
+
+         */
+
+        float[][][] side0 = updateVertices(vertices, colors[0]);
+        float[][][] side1 = updateVertices(vertices, colors[1]);
+        float[][][] side2 = updateVertices(vertices, colors[2]);
+        float[][][] side3 = updateVertices(vertices, colors[3]);
+        float[][][] side4 = updateVertices(vertices, colors[4]);
+        float[][][] side5 = updateVertices(vertices, colors[5]);
+
+        gl.glTranslatef(-1, -1, 1);
+
+        drawSingleSurface(gl, side0);
+
+        gl.glPushMatrix();
+        gl.glTranslatef(0, 2, 0);
+        //gl.glRotatef(-90, 1, 0, 0);
+        drawSingleSurface(gl, side1);
+        gl.glPopMatrix();
+
+        gl.glPushMatrix();
+        gl.glTranslatef(2, 0, 0);
+        //gl.glRotatef(90, 0, 1, 0);
+        drawSingleSurface(gl, side2);
+
+        gl.glTranslatef(2, 0, 0);
+        //gl.glRotatef(90, 0, 1, 0);
+        drawSingleSurface(gl, side3);
+        gl.glPopMatrix();
+
+        gl.glPushMatrix();
+        //gl.glRotatef(90, 1, 0, 0);
+        gl.glTranslatef(0, -2, 0);
+        drawSingleSurface(gl, side4);
+        gl.glPopMatrix();
+
+        gl.glPushMatrix();
+        //gl.glRotatef(-90, 0, 1, 0);
+        gl.glTranslatef(-2, 0, 0);
+        drawSingleSurface(gl, side5);
+        gl.glPopMatrix();
+    }
+
+    private float[][][] updateVertices(float[][][] a, float[] posColor) {
+        float colors[][] = {{1.0f, 1.0f, 1.0f}, //white 0
+                {1.0f, 0.0f, 0.0f}, //red 1
+                {0.0f, 1.0f, 0.0f}, //green 2
+                {0.0f, 0.0f, 1.0f}, //blue 3
+                {1.0f, 1.0f, 0.0f}, //yellow 4
+                {1.0f, 0.5f, 0.0f}}; //orange 5
+        float[][][] b = new float[a.length][posColor.length + 1][3];
+        for(int i = 0; i < a.length; i++) {
+            for(int j = 0; j < a[i].length; j++) {
+                for(int k = 0; k < a[i][j].length; k++) {
+                    b[i][j][k] = a[i][j][k];
+                }
+            }
         }
-        drawRubiksCubeFull(gl);
+
+        for(int i = 0; i < b.length; i++) {
+            b[i][b.length] = colors[(int)posColor[i]];
+        }
+        return b;
     }
 
-    private void drawRubiksCubeFull(GL2 gl) {
-        gl.glPushMatrix();
-        //gl.glRotated(rotDeg, 0, 0, 1);
-        gl.glTranslatef(-1.5f, -1.5f, -1.5f);
-        drawRubiksSide(gl);
-        gl.glPopMatrix();
 
-        gl.glPushMatrix();
-        //gl.glRotated(rotDeg, 0, 0, 1);
-        gl.glTranslatef(-1.5f, -1.5f, -0.5f);
-        drawRubiksSide(gl);
-        gl.glPopMatrix();
-
-        gl.glPushMatrix();
-        gl.glRotated(rotDeg, 0, 0, 1);
-        gl.glTranslatef(-1.5f, -1.5f, 0.5f);
-        drawRubiksSide(gl);
-        gl.glPopMatrix();
-    }
-
-    private void drawRubiksSide(GL2 gl) {
-        gl.glPushMatrix();
-        gl.glTranslatef(0.5f, 0.5f, 0.5f);
-        drawRubiksCube(gl,1);
-        gl.glTranslatef(1.5f, -0.5f, -0.5f);
-        drawRubiksCube(gl,1);
-        gl.glTranslatef(1.5f, -0.5f, -0.5f);
-        drawRubiksCube(gl,1);
-        gl.glPopMatrix();
-
-        gl.glPushMatrix();
-        gl.glTranslatef(0.5f, 1.5f, 0.5f);
-        drawRubiksCube(gl,1);
-        gl.glTranslatef(1.5f, -0.5f, -0.5f);
-        drawRubiksCube(gl,1);
-        gl.glTranslatef(1.5f, -0.5f, -0.5f);
-        drawRubiksCube(gl,1);
-        gl.glPopMatrix();
-
-        gl.glPushMatrix();
-        gl.glTranslatef(0.5f, 2.5f, 0.5f);
-        drawRubiksCube(gl,1);
-        gl.glTranslatef(1.5f, -0.5f, -0.5f);
-        drawRubiksCube(gl,1);
-        gl.glTranslatef(1.5f, -0.5f, -0.5f);
-        drawRubiksCube(gl,1);
-        gl.glPopMatrix();
-
-
-    }
-
-    private void drawSurfaceBlock(GL2 gl, int color) {
-        float[][] coords = {{0,1,0},{1,1,0},{1,0,0},{0,0,0}};
-        final float colors[][] = {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.5f, 0.0f}, {0f, 0f, 0f}};
-        gl.glColor3fv(colors[color], 0);
-        gl.glPushMatrix();
+    private void drawSurfaceBlock(GL2 gl, float[][] coords, float[] color) {
+        gl.glColor3fv(color, 0);
         gl.glBegin(GL_QUADS);
         gl.glVertex3fv(coords[0], 0);
         gl.glVertex3fv(coords[1], 0);
         gl.glVertex3fv(coords[2], 0);
         gl.glVertex3fv(coords[3], 0);
         gl.glEnd();
-        gl.glPopMatrix();
 
-        gl.glColor3fv(colors[6], 0);
-        gl.glLineWidth(2f);
+        gl.glColor3f(0, 0, 0);
+        gl.glLineWidth(3f);
         gl.glBegin(GL_LINE_LOOP);
         gl.glVertex3fv(coords[0], 0);
         gl.glVertex3fv(coords[1], 0);
         gl.glVertex3fv(coords[2], 0);
         gl.glVertex3fv(coords[3], 0);
         gl.glEnd();
+        gl.glLineWidth(1f);
+
     }
 
-    private void drawSurface(GL2 gl, int size, int color) {
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < size; j++) {
-                drawSurfaceBlock(gl, color);
-                gl.glTranslatef(1, 0, 0);
-            }
-            gl.glTranslatef(-size, 1, 0);
+    private void drawSingleSurface(GL2 gl, float[][][] vertices) {
+        for(int i = 0; i < vertices.length; i++ ) {
+            //System.out.println(vertices[i]);
+            gl.glPushMatrix();
+            drawSurfaceBlock(gl, vertices[i], vertices[i][4]);
+            gl.glPopMatrix();
         }
     }
 
-    private void drawRubiksCube(GL2 gl, int size) {
-        gl.glTranslatef(-((float)size/2), -((float)size/2), -((float)size/2));
-        gl.glPushMatrix();
-        drawSurface(gl, size, 0);
-        gl.glTranslatef(0, -size, 0);
-        gl.glRotatef(90, 1, 0, 0); //90 deg
-        drawSurface(gl, size, 1);
-        gl.glTranslatef(0, -size, 0);
-        gl.glRotatef(90, 0, 1, 0);
-        drawSurface(gl, size, 2);
-        gl.glTranslatef(0, 0, size);
-        gl.glRotatef(-90, 1, 0, 0);
-        drawSurface(gl, size, 4);
-        gl.glTranslatef(0, -size, 0);
-        gl.glRotatef(-90, 1, 0, 0);
-        drawSurface(gl, size, 3);
-        gl.glTranslatef(size, -size, size);
-        gl.glRotatef(90, 0, 1, 0);
-        drawSurface(gl, size, 5);
-    }
 
     private void update() {
         //cam
@@ -222,7 +238,7 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         if(rotDeg > 360 || rotDeg < -360) {
             rotDeg = 0;
         }
-        System.out.println("rotDeg: " + rotDeg);
+        //System.out.println("rotDeg: " + rotDeg);
     }
 
     private void drawAxis(GL2 gl, float length) {
@@ -241,7 +257,7 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
 
         //counters
         gl.glColor3f(1f, 1f, 1f);
-        gl.glLineWidth(3f);
+        gl.glLineWidth(4f);
         gl.glBegin(GL_LINES);
         for(int i = (int) -length; i < length; i++) {
             gl.glVertex3f(((float) i), 0.05f, 0f);
@@ -304,8 +320,14 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
                 break;
 
             case KeyEvent.VK_RIGHT:
+                hei++;
+                if(hei > 5) {
+                    hei = 0;
+                }
+                System.out.println(hei);
                 rotSide = false;
                 rotDir = true;
+                repaint();
                 break;
 
             case KeyEvent.VK_LEFT:
