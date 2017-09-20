@@ -28,7 +28,7 @@ int oppg1() {
         }
       }
     }
-    cout << str << endl;
+    cout << (i+1) << " shift: " << str << endl;
   }
   return 0;
 }
