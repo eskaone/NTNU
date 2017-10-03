@@ -1,0 +1,15 @@
+extend layout
+block content
+    form(class='form-signin' action="/login" method="post")
+        h2(class='form-signin-heading')= title
+        input(class='form-control' type="text" name="username" placeholder="Username" required autofocus)
+        input(class='form-control' type="password" name="password" placeholder="Password" required)
+        button(class='btn btn-lg btn-primary' type="submit") Log in
+        a(href='/register' class='btn btn-lg btn-success') Register
+
+    form(class='form-signin' action="/secret" method="get")
+        h2 Go to secure site
+        input(class='form-control' type="text" name="token" placeholder="Token" required)
+        button(class='btn btn-lg btn-danger' type="submit") Go
+    script
+        include ../client.js
