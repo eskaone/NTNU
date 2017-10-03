@@ -89,7 +89,9 @@ public class Oving4 extends GLCanvas implements GLEventListener, KeyListener{
         if(swapSide) {
             gl.glRotatef(-90, 1, 0, 0);
         }
-        drawRubiksCubeFull(gl);
+
+
+        //drawRubiksCubeFull(gl);
     }
 
     private void drawRubiksCubeFull(GL2 gl) {
