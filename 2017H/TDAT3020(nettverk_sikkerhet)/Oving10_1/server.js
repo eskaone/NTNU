@@ -37,11 +37,12 @@ app.use(logger('dev'));
 var server = https.createServer(credentials, app);
 
 //routes
-router.post('/login',(req,res)=>{
-    console.log(req.body);
-    var user = _.find(users, {name: req.body.username});
+router.get('/login',(req,res)=>{
+    console.log(req.query.username);
+    console.log(req.query.password);
+    var user = _.find(users, {name: req.query.username});
     console.log(user);
-    if(user && validPassword(req.body.password, user)){
+    if(user && validPassword(req.query.password, user)){
         user.token = jwt.sign({id: user.id}, 'secret', {expiresIn: 30});
         var token = jwt.sign({id: user.id}, 'secret', {expiresIn: 30});
         res.status(200).json({token: token, message: 'Token given!'});
@@ -71,10 +72,6 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/', (req,res)=>{
-    res.redirect('/login');
-});
-
-router.get('/login', (req,res)=>{
     res.render('login', {title: 'Log in'});
 });
 
@@ -88,8 +85,8 @@ router.post('/logout',(req,res)=>{
 });
 
 router.use(function(req, res, next){
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    console.log('token from req body: ' + token)
+    var token = req.headers['x-access-token'];
+    console.log('token from header: ' + token)
     if(token) {
         jwt.verify(token, 'secret', function(err, decoded){
             if(err) {
