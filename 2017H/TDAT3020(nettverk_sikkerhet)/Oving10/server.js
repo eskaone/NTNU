@@ -11,11 +11,12 @@ var users = [
     {
         id: 1,
         name: 'admin',
-        salt: "3301f9a59fdd1034bfbdfbca48f8f2b6",
-        hash: "99a1d079689031a03f0b842e339ee2d3f6f698177158028a82003211bb6491c0ee4fd21c2eab33d44c42786c77c7bba39d355f47c2a0803b3d540b00cbc2d9a5"
+        salt: "bc9d872f5085c4ae56c02573d16c1c8a",
+        hash: "38601c388caf55d3445e3ef51ee84573523d21b122f08194ed6b0ea4336b11687bc9f01985c2d5f44c3ffb2a20c8980fad3e80edc664c1a4cef940dedb911044"
     }
 ];
 
+var token = null;
 var secret = 'IHopeThisIsSecureEnough';
 
 var credentials = {
@@ -41,56 +42,57 @@ app.get('/register', function (req, res) {
     res.sendFile('views/register.html', {root: __dirname })
 });
 
-app.get('/users', function(req, res, next) {
-    console.log(req.id);
-    console.log(res.id);
-    loginReq(req, res, next);
+app.get('/auth', function (req, res) {
+    res.json({token: token});
 });
 
-app.post('/users', function (req, res) {
-    res.redirect("/");
-});
-
-app.post('/', function (req, res) {
-    var username = req.body.uname;
-    var password = req.body.pword;
-    var user = users[_.findIndex(users, {name: username})];
-    console.log(user);
-
-    if(user && validPassword(password, username)) {
-        var payload = {id: user.id};
-        res.status(200).json({message: 'Success!' ,token: jwt.sign(payload, 'secret')});
-    } else {
-        res.status(403).send("Log in failed.");
-    }
-});
-
-app.post('/register', function (req, res) {
-    if(req.body.pword === req.body.pword_repeat) {
-        var username = req.body.uname;
-        var password = req.body.pword;
-        var salt = cryptoJS.lib.WordArray.random(128/8).toString();
-        users.push({
-            id: users.length+1,
-            name: username,
-            salt: salt,
-            hash: generateHash(password, salt)
+app.get('/secret', function(req, res) {
+    console.log('token stored: ' + token);
+    if(token) {
+        jwt.verify(token, secret, function(err, decoded){
+            if(err) {
+                return res.json({ success: false, message: 'Failed to authenticate token.' });
+            } else {
+                console.log("token accepted!");
+                return res.status(200).json({message: 'you need to login to see this, I hope.. Expires in 1 min!', token: token}); 
+            }
         });
-        var user = users[_.findIndex(users, {name: username})];
-        console.log(users);
-        res.json(user);
     } else {
-        res.status(403).send("Password don't match!");
+        return res.status(403).send({ 
+            success: false, 
+            message: 'No token provided.' 
+        });
     }
 });
 
-function loginReq(req, res, next) {
-    if(req.user) {
-        next();
+app.post('/login', function (req, res) {
+    var username = req.body.username;
+    var hash = req.body.hash;
+    var user = users[_.findIndex(users, {name: username})];
+
+    if(user && validPassword(hash, username)) {
+        var payload = {id: user.id};
+        token = issueToken(payload);
+        res.status(200).json({token: token});
     } else {
-        return res.status(401).json({message: 'Unauthorized user!'});
+        res.sendStatus(403);
     }
-}
+});
+
+app.post('/register', function(req, res){
+    var hashedPassword = req.body.hash;
+    var salt = cryptoJS.lib.WordArray.random(128/8).toString();
+    users.push({
+            id: users.length+1,
+            name: req.body.salt,
+            salt: salt,
+            hash: generateHash(hashedPassword, salt)
+        });
+    console.log(users[users.length-1]);
+    var payload = {id: users[users.length-1].id};
+    token = issueToken(payload);
+    res.status(200).json({token: token});
+});
 
 function generateHash(password, salt) {
     var options={keySize: 512/32, iterations: 4096};
@@ -107,12 +109,12 @@ function validPassword(password, username) {
 }
 
 function issueToken(payload) {
-    var token = jwt.sign(payload, process.env.TOKEN_SECRET || " I hope this is secure enough");
+    var token = jwt.sign(payload, secret, {expiresIn: 60});
     return token;
 }
 
 function verifyToken(token, verified) {
-    return jwt.verify(token, process.env.TOKEN_SECRET || " I hope this is secure enough", {}, verified);
+    return jwt.verify(token, secret, {}, verified);
 }
 
 server.listen(port);

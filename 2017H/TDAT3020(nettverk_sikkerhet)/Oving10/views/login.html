@@ -3,18 +3,48 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Oving 10 - Login</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     </head>
 
     <body>
         <h1>Encrypted login</h1>
-        <form method="POST">
-            <input type="text" placeholder="User Name" name="uname" autocomplete="false" required>
-            <br>
-            <input type="password" placeholder="Password" name="pword" required>
-            <br>
-            <input type="submit" value="Log in">
-            <a href="register">Register user</a>
-        </form>
+        
+        <input type="text" placeholder="User Name" name="uname" id="username" autocomplete="false" required>
+        <br>
+        <input type="password" placeholder="Password" name="pword" id="password" required>
+        <br>
+        <button onclick="login()" type="submit">Log in</button>
+        <button onclick="location.href='register'">Register user</button>
+        <br>
+        <button onclick="location.href='auth'">Check token</button>
+        <button onclick="location.href='secret'">Secret page</button>
+
+        
+        <script>
+            function generateHash(password, salt) {
+                var options={keySize: 512/32, iterations: 4096};
+                return CryptoJS.PBKDF2(password, salt, options).toString();
+            }
+
+            var login = function(){
+                var password = $('#password').val();
+                var salt = $('#username').val();
+                var hash = generateHash(password, salt);
+
+                if(salt != "" && password != "") {
+                    $.post({
+                        url: "login", 
+                        data: JSON.stringify({"username": salt, "hash": hash}),
+                        contentType: "application/json",
+                        success: function(data){
+                            alert("Log in successful! Token: " + data.token);
+                        }
+                    });
+                }
+            }
+        </script>
     </body>
 </html>
 
